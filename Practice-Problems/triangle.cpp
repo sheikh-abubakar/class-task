@@ -5,17 +5,19 @@ int main(){
     int n;
     cout<< "enter number of rows : ";
     cin>> n;
-    int num = 1;
-    int* *ptr_row = new int*[n];
+    
+    int** ptr_row = new int*[n];
 
     for(int i =0; i < n; i++){
-        ptr_row[i] = new int[i+1];
+        ptr_row[i] = new int[n+1];
     }
+    int num = 1;
 
     for(int i= 0; i <n; i++){
         for(int j =0; j<=i; j++){
             ptr_row[i][j]= num++;
         }
+        num =1;//to start each row from one
     }
     for(int i= 0; i <n; i++){
         for(int j =0; j<=i; j++){

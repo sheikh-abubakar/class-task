@@ -27,7 +27,7 @@ void countvowels( const char* cptr) {
 	int count = 0;
 	for (int i = 0; i < l; i++) {
 		if(cptr[i] == 'a' || cptr[i] == 'e' || cptr[i] == 'i' || cptr[i] == 'o' || cptr[i] == 'u'
-			cptr[i] == 'A' || cptr[i] == 'E' || cptr[i] == 'I' || cptr[i] == 'O' || cptr[i] == 'U'
+			|| cptr[i] == 'A' || cptr[i] == 'E' || cptr[i] == 'I' || cptr[i] == 'O' || cptr[i] == 'U'
 			) {
 			count++;
 		}

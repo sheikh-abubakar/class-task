@@ -9,7 +9,8 @@
     int add_item = 0; //index in todolist, to add next item to
     char* todolist[SIZE];
     int n;
-    int i = 0;
+    
+    
     int count = 0;
    
 
@@ -23,14 +24,14 @@
     do{
           cout << "Enter an option" << endl;
           cin>> n;
-         cin.ignore();
+         cin.ignore(1000, '\n');
         switch(n){
             case 0: 
             cout<<"Exit";
             break;
 
-            case 1:
-            
+            case 1:{
+                
             if(count == SIZE){
                  
                 cout<< "List is full" << endl;
@@ -39,7 +40,7 @@
 
             cin.getline(buffer, sizeof(buffer));
             todolist[add_item] = new char [100];
-           
+            int i = 0;
             while(buffer[i] != '\0'){
                 todolist[add_item][i] = buffer[i];
                 i++;
@@ -57,6 +58,8 @@
                 read_item = (read_item + 1) % SIZE;
             }
              break;
+            }
+            
             // Case 2
 
             case 2: 
@@ -85,10 +88,8 @@
                 
                     
                 }
-                 
-            }
-            
-            break;
+            }            
+           break;
 
         }
 

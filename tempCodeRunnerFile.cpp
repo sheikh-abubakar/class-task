@@ -1,15 +1,15 @@
 #include <iostream>
+#include <cstring> // Include this for strlen
 using namespace std;
 
 int main() {
-    const int SIZE = 10;          // Maximum number of tasks
-    char buffer[100];             // Temporary buffer for input
-    int read_item = 0;            // Index to read the next item from the list
-    int add_item = 0;             // Index to add the next item to the list
-    char* todolist[SIZE];         // Circular array to store tasks
-    int n;  
-    int i = 0;                       // User's menu option
-    int count = 0;                // Number of items in the list
+    const int SIZE = 10;           // Maximum number of tasks
+    char buffer[100];              // Temporary buffer for input
+    int read_item = 0;             // Index to read the next item from the list
+    int add_item = 0;              // Index to add the next item to the list
+    char* todolist[SIZE];          // Circular array to store tasks
+    int n;                         // User's menu option
+    int count = 0;                 // Number of items in the list
 
     do {
         // Display menu options
@@ -26,7 +26,7 @@ int main() {
                 cout << "Exiting...\n";
                 break;
 
-            case 1:
+            case 1: {
                 if (count == SIZE) {
                     cout << "List is full, overwriting the oldest task...\n";
                 }
@@ -35,10 +35,10 @@ int main() {
                 cin.getline(buffer, sizeof(buffer));  // Read the task from the user
 
                 // Allocate memory for the new task
-                todolist[add_item] = new char[100];
+                todolist[add_item] = new char[strlen(buffer) + 1];  // Allocate enough memory
 
                 // Copy the input into the todo list (manual string copy)
-                 // Reset index for copying
+                int i = 0;  // Reset index for copying
                 while (buffer[i] != '\0') {
                     todolist[add_item][i] = buffer[i];
                     i++;
@@ -54,6 +54,7 @@ int main() {
                     read_item = (read_item + 1) % SIZE;
                 }
                 break;
+            }
 
             case 2:
                 if (count == 0) {

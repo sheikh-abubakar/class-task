@@ -83,8 +83,8 @@
                 cout << "All tasks in todo list:" << endl;
                 
                 for (int i = 0; i < count; i++) {
-                    int x = (read_item + i) % SIZE;  
-                    cout << i + 1 << ". " << todolist[x] << endl; 
+                    int x = (read_item + i) % SIZE;  //read_item is the starting index of the list
+                    cout << i + 1 << ". " << todolist[x] << endl;  //access the task at that index in the todolist array
                 
                     
                 }

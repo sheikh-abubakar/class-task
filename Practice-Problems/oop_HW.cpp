@@ -5,8 +5,8 @@
 
     const int SIZE = 10;
     char buffer[100];
-    int read_item = 0; //index in todolist, to read next item from
-    int add_item = 0; //index in todolist, to add next item to
+    int read_item = 0;
+    int add_item = 0; 
     char* todolist[SIZE];
     int n;
     

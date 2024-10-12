@@ -46,12 +46,12 @@ public:
         delete[] ptr;
     }
 
-    // Get element at position (i, j)
+    
     int get(int i, int j) {
         return ptr[i][j];
     }
 
-    // Set element at position (i, j)
+   
     void set(int i, int j, int val) {
         ptr[i][j] = val;
     }
@@ -60,7 +60,6 @@ public:
         return ptr[i][j];
     }
 
-    // Input matrix values
     void inputMatrix() {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -106,7 +105,7 @@ public:
 
     }
 
-    // Output matrix values
+    
     void outputMatrix() {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -116,7 +115,7 @@ public:
         }
     }
 
-    // Check if the matrix is square
+    
     bool isSquare() {
         return row == col;
     }
@@ -212,7 +211,7 @@ public:
         }
         return true;
     }
-    // Add two matrices
+    
     Matrix add(Matrix& m) {
         Matrix result(row, col);
         if (row == m.row && col == m.col) {
@@ -224,11 +223,12 @@ public:
         }
         else {
             cout << "Matrices are not compatible for addition!" << endl;
+             return Matrix();
         }
         return result;
     }
 
-    // Subtract two matrices
+   
     Matrix subtract(Matrix& m) {
         Matrix result(row, col);
         if (row == m.row && col == m.col) {
@@ -240,13 +240,16 @@ public:
         }
         else {
             cout << "Matrices are not compatible for subtraction!" << endl;
+            
+            return Matrix();
+        
         }
         return result;
     }
 
-    // Transpose of the matrix
+    
     Matrix transpose() {
-        Matrix result(col, row);  // Rows and cols are swapped
+        Matrix result(col, row);  
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 result.cell(i, j) = cell(i, j);
@@ -268,14 +271,18 @@ public:
 
                 }
             }
-            
+            return result;
         }
-        return result;
+        
+          else{
+            cout<<"Multiplication is not possible"<<endl;
+            return Matrix();
+        }
      }
     
 };
 
-// Main function with menu-driven operations
+
 int main() {
     int r, c;
 
@@ -406,11 +413,15 @@ int main() {
             int rows, cols;
             cout<<"enter rows and col for new matrix"<<endl;
             cin >> rows >> cols;
-
+            
             mat1.resizeMatrx(rows, cols);
             mat1.outputMatrix();
+            
+            
+            
         }
         case 12 : {
+          
             Matrix result = mat1.multiplication(mat2);
             cout << "Result of multiply:" << endl;
             result.outputMatrix();

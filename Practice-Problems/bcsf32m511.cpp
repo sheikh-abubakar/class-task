@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//oop assignment 2
 int stringlen(const char* arr) {
     int l = 0;
     while (arr[l] != '\0') {
@@ -9,7 +9,7 @@ int stringlen(const char* arr) {
     return l;
 }
 
-char* strcopy(const char* arr1) {
+char* strcompare(const char* arr1) {
     int l = stringlen(arr1);
     char* arr2 = new char[l + 1];
     for (int i = 0; i < l; i++) {
@@ -17,6 +17,17 @@ char* strcopy(const char* arr1) {
     }
     arr2[l] = '\0';
     return arr2;
+}
+
+int strcompare(const char* str1, const char* str2) {
+    int i = 0;
+    while (str1[i] != '\0' && str2[i] != '\0') {
+        if (str1[i] != str2[i]) {
+            return str1[i] - str2[i];
+        }
+        i++;
+    }
+    return str1[i] - str2[i];
 }
 
 struct Book {
@@ -42,32 +53,50 @@ Book** initializeLibrary(int& numCategories, int*& numBooksinCategory, int*& fre
 }
 
 void addBook(Book** library, int numCategories, int* numBooksInCategory, int* freeIndexInCategory) {
-    cout << "Enter category number to add: ";
+    cout << "Enter category number to add (1 to " << numCategories << "): ";
     int cat_num;
     cin >> cat_num;
+    cin.ignore(100, '\n'); // Clear the input buffer to handle leftover newlines
+
     if (freeIndexInCategory[cat_num - 1] == numBooksInCategory[cat_num - 1]) {
-        cout << "Limit is full";
+        cout << "Limit is full" << endl;
         return;
     }
-    cin >> library[cat_num - 1][freeIndexInCategory[cat_num - 1]].title;
-    cin >> library[cat_num - 1][freeIndexInCategory[cat_num - 1]].author;
+
+    cout << "Enter Book title: ";
+    cin.getline(library[cat_num - 1][freeIndexInCategory[cat_num - 1]].title, 50);
+
+    cout << "Enter Author: ";
+    cin.getline(library[cat_num - 1][freeIndexInCategory[cat_num - 1]].author, 50);
+
+    cout << "Number of Copies: ";
     cin >> library[cat_num - 1][freeIndexInCategory[cat_num - 1]].numOfCopies;
+    cout << "Book added successfully!" << endl;
+
     freeIndexInCategory[cat_num - 1]++;
 }
 
+
 Book* searchBook(Book** library, int numCategories, int* numBooksInCategory, int* freeIndexInCategory) {
-    char temp[50];
-    cin.ignore(50, '\0');
-    cin.getline(temp, 50);
-    for (int i = 0; i < numCategories; i++) {
-        for (int j = 0; j < freeIndexInCategory[i]; j++) {
-            if (strcmp(library[i][j].title, temp) == 0) {
-                cout << "Found" << endl;
-                return &library[i][j];
-            }
-        }
-    }
-    return nullptr;
+  char bookTitle[50];
+	cin.ignore(500, '\n');
+	cout << "Enter book title to search: ";
+	cin.getline(bookTitle, sizeof(bookTitle));
+	for (int i = 0; i < numCategories; i++) {
+		for (int j = 0; j < freeIndexInCategory[i]; j++) {
+			if (strcompare(library[i][j].title , bookTitle)==0) {
+				cout << "Found in category " << i + 1 << endl;
+				cout << "Title: " << library[i][j].title<<endl;
+				cout << "Author: " << library[i][j].author<<endl;
+				cout << "Copies: " << library[i][j].numberOfCopies<<endl;
+				return &(library[i][j]);
+			}
+			
+		}
+	}
+	cout << " No Book Found with this title " << endl;
+	return nullptr;
+
 }
 
 void updateCopies(Book** library, int numCategories, int* numBooksInCategory, int* freeIndexInCategory) {
@@ -75,6 +104,10 @@ void updateCopies(Book** library, int numCategories, int* numBooksInCategory, in
     if (ptr == nullptr) {
         cout << "Book not found" << endl;
     } else {
+       cout<<"enter book title to update : ";
+        cin.ignore(50, '\0');
+        cin.getline(ptr->title, 50);
+        cout << "Enter new number of copies: ";
         cin >> ptr->numOfCopies;
     }
 }
@@ -82,7 +115,8 @@ void updateCopies(Book** library, int numCategories, int* numBooksInCategory, in
 void printAllBooks(Book** library, int numCategories, int* numBooksInCategory, int* freeIndexInCategory) {
     for (int i = 0; i < numCategories; i++) {
         for (int j = 0; j < freeIndexInCategory[i]; j++) {
-            cout << library[i][j].title << " " << library[i][j].author << " " << library[i][j].numOfCopies << endl;
+            cout<<"Category "<<i+1<<endl;
+            cout << "Title: " <<library[i][j].title << " " << " Author: " << library[i][j].author << " " << " Copies:" << library[i][j].numOfCopies << endl;
         }
     }
 }

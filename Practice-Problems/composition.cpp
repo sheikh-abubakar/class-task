@@ -129,7 +129,6 @@ int main(){
     Student s1(1,n1);
     s1.stdPrint();
     cout<<"--------"<<endl;
-    Laptop(10);
     s1.allocateLaptop(&L);
     s1.stdPrint();
     L.Lprint();
